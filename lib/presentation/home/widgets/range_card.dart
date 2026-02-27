@@ -76,6 +76,20 @@ class _RangeCardState extends State<RangeCard> {
               style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
             ),
           ),
+          if (widget.status == RangeStatus.error)
+            const Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: Row(
+                children: [
+                  Icon(Icons.error_outline, color: Colors.redAccent, size: 18),
+                  SizedBox(width: 8),
+                  Text(
+                    'O valor inicial deve ser menor que o final.',
+                    style: TextStyle(color: Colors.redAccent, fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
           if (widget.status == RangeStatus.loading)
             const Padding(
               padding: EdgeInsets.only(top: 16),

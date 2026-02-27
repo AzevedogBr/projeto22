@@ -4,9 +4,11 @@ import 'package:projeto22/domain/services/perfect_number_service.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(const HomeState());
+  HomeCubit({PerfectNumberService? service})
+    : _service = service ?? PerfectNumberService(),
+      super(const HomeState());
 
-  final _service = PerfectNumberService();
+  final PerfectNumberService _service;
 
   void checkNumber(int n) {
     final result = _service.isPerfect(n);
@@ -19,6 +21,10 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> findInRange(int start, int end) async {
+    if (start > end) {
+      emit(state.copyWith(rangeStatus: RangeStatus.error));
+      return;
+    }
     emit(state.copyWith(rangeStatus: RangeStatus.loading));
     await Future.delayed(const Duration(milliseconds: 200));
     final results = _service.findInRange(start, end);

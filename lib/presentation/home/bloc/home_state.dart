@@ -2,7 +2,7 @@ part of 'home_cubit.dart';
 
 enum CheckStatus { initial, perfect, notPerfect }
 
-enum RangeStatus { initial, loading, done }
+enum RangeStatus { initial, loading, done, error }
 
 class HomeState {
   final CheckStatus checkStatus;
